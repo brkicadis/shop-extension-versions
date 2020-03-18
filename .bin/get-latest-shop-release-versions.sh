@@ -3,16 +3,17 @@
 set -e
 set -x
 
-DEFAULT_CONDITION=$(jq -r '.[] | .tag_name' | egrep -v [a-zA-Z] | head -3)
+
+#DEFAULT_CONDITION=$(jq -r '.[] | .tag_name' | egrep -v [a-zA-Z] | head -3)
 FILENAME=${SHOP_SYSTEM^^}_COMPATIBILITY_FILE
+#
+#case ${SHOP_SYSTEM} in "prestashop") export CONDITION=jq -r '.[] | .tag_name' | egrep -v [a-zA-Z] | grep -v "^1.6";;
+#"woocommerce") export CONDITION=${DEFAULT_CONDITION};;
+#"magento2") export CONDITION=${DEFAULT_CONDITION};;
+#*)
+#esac
 
-case ${SHOP_SYSTEM} in "prestashop") export CONDITION=jq -r '.[] | .tag_name' | egrep -v [a-zA-Z] | grep -v "^1.6";;
-"woocommerce") export CONDITION=${DEFAULT_CONDITION};;
-"magento2") export CONDITION=${DEFAULT_CONDITION};;
-*)
-esac
-
-curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/"${SHOP_SYSTEM}"/"${SHOP_SYSTEM}"/releases | ${CONDITION} > tmp.txt
+curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/"${SHOP_SYSTEM}"/"${SHOP_SYSTEM}"/releases | jq -r '.[] | .tag_name' | egrep -v [a-zA-Z] | head -3 > tmp.txt
 
 sort -nr tmp.txt > "${FILENAME}"
 
