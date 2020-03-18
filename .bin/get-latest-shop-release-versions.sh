@@ -12,9 +12,8 @@ FILENAME=${SHOP_SYSTEM^^}_COMPATIBILITY_FILE
 #"magento2") export CONDITION=${DEFAULT_CONDITION};;
 #*)
 #esac
-SHOP_SYSTEM=${SHOP_SYSTEM}
-echo "${SHOP_SYSTEM}"
-
+echo "Filename: "
+echo "${FILENAME}"
 curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/"${SHOP_SYSTEM}"/"${SHOP_SYSTEM}"/releases | jq -r '.[] | .tag_name' | egrep -v [a-zA-Z] | head -3 > tmp.txt
 
 sort -nr tmp.txt > "${FILENAME}"
