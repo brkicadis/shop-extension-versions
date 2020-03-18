@@ -3,7 +3,6 @@
 set -e
 set -x
 
-
 curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/"${SHOP_SYSTEM}"/"${SHOP_SYSTEM}"/releases | jq -r '.[] | .tag_name' | egrep -v [a-zA-Z] | head -3 > tmp.txt
 
 sort -nr tmp.txt > "${COMPATIBILITY_FILE}"
