@@ -12,5 +12,5 @@ if [[ ${COMPATIBILITY_CHECK}  == "1" ]]; then
     git config --global user.email "wirecard@travis-ci.org"
     git add  "${RELEASE_FILENAME}"
     git commit -m "${SHOP_SYSTEM_UPDATE_COMMIT}"
-    cd /home/travis/build/wirecard/prestashop-ee/wirecardpaymentgateway/vendor/wirecard/shopsystem-ui-testsuite && git push https://"${GITHUB_TOKEN}"@github.com/wirecard/shopsystems-ui-testsuite.git HEAD:TPWDCEE-5954
+    cd /home/travis/build/wirecard/prestashop-ee/shop-extension-versions && git push https://"${GITHUB_TOKEN}"@github.com/brkicadis/shop-extension-versions.git HEAD:TPWDCEE-5954
 fi
