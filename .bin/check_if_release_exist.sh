@@ -11,4 +11,4 @@ else
   export PRESTASHOP_VERSION=$(awk "NR==${PRESTASHOP_RELEASE_VERSION} {print; exit}" "${COMPATIBILITY_FILE}");
 fi
 
-echo "Testing with Prestashop version ${PRESTASHOP_VERSION}"
+echo "Testing with Prestashop version from script ${PRESTASHOP_VERSION}"
